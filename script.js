@@ -1,18 +1,31 @@
 
 // array of time in the work day
 let times = ['9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm'];
+let hours = [9, 10, 11, 12, 13, 14, 15, 16, 17];
 let todoList = ["", "", "", "", "", "", "", "", ""];
 let toDoText;
 
+let m = moment();
+let x = m.hour();
+
 // create a row for each time of the day that includes a textarea and a save button
-$.each(times, function(index, time) {
-    let timeRow = $('<div class="row">')
-    let hour = $('<div class="col-md-1 hour">').text(time);
+$.each(hours, function(index, time) {
+    let timeRow = $('<div class="row time-block">')
+    let hour = $('<div class="col-md-1 hour">').text(times[index]);
     timeRow.append(hour);
-    toDoText = $('<textarea class="col-md-10 past"></textarea>');
-    toDoText.attr("id", index);
-    //toDoText.val(todoList[index]);
+    toDoText = $('<textarea class="col-md-10"></textarea>');
     timeRow.append(toDoText);
+    toDoText.attr("id", index);
+    if(x > hours[index]) {
+        toDoText.attr("class", "past");
+    }
+    else if(x == hours[index]) {
+        toDoText.attr("class", "present");
+    }
+    else {
+        toDoText.attr("class", "future");
+    }
+    //toDoText.val(todoList[index]);
     saveButton = $('<button class="col-md-1 saveBtn">Save</button>');
     saveButton.attr("data-save", index);
     timeRow.append(saveButton);
@@ -23,7 +36,6 @@ $('.saveBtn').on('click', function() {
     let index = $(this).attr("data-save");
     let textIndex = '#' + index;
     todoList[index] = $(textIndex).val();
-
+    localStorage.setItem("todo", todoList);
     console.log(todoList);
-    //console.log($(this).previousElementSibling);
 })
