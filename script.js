@@ -13,17 +13,17 @@ $.each(hours, function(index, time) {
     let timeRow = $('<div class="row time-block">')
     let hour = $('<div class="col-md-1 hour">').text(times[index]);
     timeRow.append(hour);
-    toDoText = $('<textarea class="col-md-10"></textarea>');
+    toDoText = $('<textarea></textarea>');
     timeRow.append(toDoText);
     toDoText.attr("id", index);
     if(x > hours[index]) {
-        toDoText.attr("class", "past");
+        toDoText.attr("class", "past col-md-10");
     }
     else if(x == hours[index]) {
-        toDoText.attr("class", "present");
+        toDoText.attr("class", "present col-md-10");
     }
     else {
-        toDoText.attr("class", "future");
+        toDoText.attr("class", "future col-md-10");
     }
     //toDoText.val(todoList[index]);
     saveButton = $('<button class="col-md-1 saveBtn">Save</button>');
