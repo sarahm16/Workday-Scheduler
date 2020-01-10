@@ -3,22 +3,34 @@
 let times = ['9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm'];
 let hours = [9, 10, 11, 12, 13, 14, 15, 16, 17];
 let toDoText;
-let todoList = ["","","","","","","","",""];
+let todoArray = [];
+let days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-// sets local storage if it hasn't been set yet
-if(localStorage.getItem("todo-list") == undefined) {
-    localStorage.setItem("todo-list", JSON.stringify(todoList));
+// create an empty array to store user input
+for(let i=0; i<times.length; i++) {
+    todoArray[i] = "";
 }
 
-// create a moment object to retrieve current hour
+// sets local storage to empty array if it hasn't been set yet
+if(localStorage.getItem("todo-list") == undefined) {
+    localStorage.setItem("todo-list", JSON.stringify(todoArray));
+}
+
+// create a moment object to retrieve current hour and date
 let m = moment();
 let currentHour = m.hour();
+let weekday = m.day();
+let month = m.month();
+
+// display current day of the year
+$('#currentDay').text(days[weekday-1] + ", " + months[month] + " " + m.date() + ", " + m.year());
 
 // create a row for each time of the work day
 $.each(hours, function(index, time) {
 
     // create new time block
-    let timeRow = $('<div class="row time-block">')
+    let timeRow = $('<div class="row time-block">');
 
     //create and append time to time block
     let hour = $('<div class="col-md-1 hour">').text(times[index]);
@@ -41,8 +53,8 @@ $.each(hours, function(index, time) {
     }
 
     // retrieve todoList from local storage and set value of text area
-    todoList = JSON.parse(localStorage.getItem("todo-list"));
-    toDoText.val(todoList[index]);
+    todoArray = JSON.parse(localStorage.getItem("todo-list"));
+    toDoText.val(todoArray[index]);
 
     // create and append save button
     saveButton = $('<button class="col-md-1 saveBtn">Save</button>');
@@ -55,7 +67,7 @@ $.each(hours, function(index, time) {
 $('.saveBtn').on('click', function() {
     let index = $(this).attr("data-save");
     let textIndex = '#' + index;
-    todoList[index] = $(textIndex).val();
-    localStorage.setItem("todo-list", JSON.stringify(todoList));
+    todoArray[index] = $(textIndex).val();
+    localStorage.setItem("todo-list", JSON.stringify(todoArray));
 
 })
