@@ -8,3 +8,5 @@ When the user saves input in a specific hour's text area, the text is saved into
 An object in Moment.js retrieves the current date and time, which are stored into variables and displayed on the screen.
 
 <img src="./images/home.png">
+
+<a href="https://sarahm16.github.io/homework-5/.">Link to Workday Scheduler</a>
