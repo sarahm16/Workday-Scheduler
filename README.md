@@ -1,4 +1,4 @@
-# homework-5
+# Homework 5: Workday Scheduler
 
 The purpose of this application is to simplify the users work day by keeping track of the date, the time of the day, and tasks that the user inputs into each hour. Each hour of the day is color coded: hours that have passed are gray, the current hour is red, and future hours are green.
 
